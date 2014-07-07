@@ -1,0 +1,22 @@
+# WWW HTTP -> non-WWW
+server {
+        listen 80;
+        server_name www.site.com;
+        return 301 $scheme://site.com$request_uri;
+}
+
+
+server {
+        listen 80;
+        server_name site.com;
+        root /home/site/web;
+
+        include global/wp-restrictions;
+
+        # Additional rules go here.
+
+        # Only include one of the files below.
+        include global/wp-single;
+#       include global/wp-ms-subdir.conf;
+#       include global/wp-ms-subdomain.conf;
+}
